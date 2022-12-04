@@ -1,5 +1,6 @@
 const assert = require("assert");
 const fs = require("fs");
+const { findIntersection } = require("./_common");
 
 const parseData = (file) => fs.readFileSync(file).toString().trim().split("\n");
 
@@ -18,30 +19,6 @@ assert.deepEqual(compartmentalize(testData[1]), [
   "jqHRNqRjqzjGDLGL",
   "rsFMfFZSrLrFZsSL",
 ]);
-
-const findIntersection = (strArr) => {
-  strArr.sort((a, b) => a.length - b.length);
-
-  const int = new Set();
-  const ref = strArr[0];
-  const others = strArr.slice(1);
-
-  for (let i = 0; i < ref.length; i++) {
-    let count = 0;
-    const test = ref[i];
-    for (let j = 0; j < others.length; j++) {
-      const other = others[j];
-      if (other.includes(test)) {
-        count++;
-      }
-    }
-    if (count === strArr.length - 1) {
-      int.add(test);
-    }
-  }
-
-  return [...int];
-};
 
 assert.deepEqual(findIntersection(compartmentalize(testData[0])), ["p"]);
 assert.deepEqual(findIntersection(compartmentalize(testData[1])), ["L"]);
