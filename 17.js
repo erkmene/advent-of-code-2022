@@ -179,9 +179,14 @@ class Tetris {
   assert.equal(tetris.interpolate(2022, 55, 35), 3068);
 })();
 
+console.time("Time to first answer");
 const tetris = new Tetris("17.dat");
-console.log(tetris.playUntilPieceStop({ count: 2022 }).topY);
+console.log("First Answer", tetris.playUntilPieceStop({ count: 2022 }).topY);
+console.timeEnd("Time to first answer");
+
 assert(tetris.playUntilPieceStop({ count: 2022 }).topY, 3193);
 assert(tetris.interpolate(2022, 305, 1745), 3193);
 
-console.log(tetris.interpolate(1000000000000, 305, 1745));
+console.time("Time to second answer");
+console.log("Second Answer", tetris.interpolate(1000000000000, 305, 1745));
+console.timeEnd("Time to second answer");
